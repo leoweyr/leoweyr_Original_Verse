@@ -19,7 +19,7 @@ class CosmicBackground extends Component {
 
     public render(): ReactNode {
         const backgroundStyle: CSSProperties = {
-            position: "absolute",
+            position: "fixed",
             top: 0,
             left: 0,
             width: "100vw",

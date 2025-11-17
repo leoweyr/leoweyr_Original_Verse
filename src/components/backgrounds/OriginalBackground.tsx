@@ -4,7 +4,7 @@ import { Component, type ReactNode, type CSSProperties} from "react";
 class OriginalBackground extends Component {
     public render(): ReactNode {
         const baseStyle: CSSProperties = {
-            position: 'absolute',
+            position: 'fixed',
             top: '0',
             left: '0',
             width: '100vw',
