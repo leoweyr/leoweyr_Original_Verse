@@ -23,7 +23,8 @@ class Expression extends Component<ExpressionProps> {
             padding: '1.171875vh 4.027777vw 1.171875vh 4.027777vw',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#F3F3F3'
+            backgroundColor: '#F3F3F3',
+            zIndex: 10
         }
 
         const barLeftCircleStyle: CSSProperties = {
@@ -34,7 +35,8 @@ class Expression extends Component<ExpressionProps> {
             width: '6.217426vh',
             height: '6.217426vh',
             borderRadius: '50%',
-            backgroundColor: '#F3F3F3'
+            backgroundColor: '#F3F3F3',
+            zIndex: parseInt(barRectangleStyle.zIndex!.toString()) + 1
         }
 
         const barRightCircleStyle: CSSProperties = {
@@ -45,32 +47,37 @@ class Expression extends Component<ExpressionProps> {
             width: '6.217426vh',
             height: '6.217426vh',
             borderRadius: '50%',
-            backgroundColor: '#F3F3F3'
+            backgroundColor: '#F3F3F3',
+            zIndex: parseInt(barRectangleStyle.zIndex!.toString()) + 1
         }
 
         const textContainerStyle: CSSProperties = {
+            position: 'relative',
             display: 'inline-block',
             fontFamily: 'Inter, sans-serif',
             textAlign: 'center',
-            backgroundColor: '#F3F3F3'
+            backgroundColor: '#F3F3F3',
+            zIndex: parseInt(barRectangleStyle.zIndex!.toString()) + 2
         }
 
         const textStyle: CSSProperties = {
+            position: 'relative',
             fontSize: '2.929687vh',
             fontWeight: 900,
             color: '#000000',
             margin: 0,
             padding: 0,
-            whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap',
+            zIndex: parseInt(textContainerStyle.zIndex!.toString()) + 1
         }
 
         return (
             <div style={barRectangleStyle}>
+                <div style={barLeftCircleStyle} />
+                <div style={barRightCircleStyle} />
                 <div style={textContainerStyle}>
                     <span style={textStyle}>{sign}</span>
                 </div>
-                <div style={barLeftCircleStyle} />
-                <div style={barRightCircleStyle} />
             </div>
         )
     }
