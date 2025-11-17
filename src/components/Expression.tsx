@@ -32,8 +32,8 @@ class Expression extends Component<ExpressionProps> {
             top: '0',
             left: '0',
             transform: 'translateX(-50%)',
-            width: '6.219926vh',
-            height: '6.219926vh',
+            width: '6.319926vh',
+            height: '6.319926vh',
             borderRadius: '50%',
             backgroundColor: '#F3F3F3',
             zIndex: parseInt(barRectangleStyle.zIndex!.toString()) + 1
@@ -44,8 +44,8 @@ class Expression extends Component<ExpressionProps> {
             top: '0',
             right: '0',
             transform: 'translateX(50%)',
-            width: '6.219926vh',
-            height: '6.219926vh',
+            width: '6.319926vh',
+            height: '6.319926vh',
             borderRadius: '50%',
             backgroundColor: '#F3F3F3',
             zIndex: parseInt(barRectangleStyle.zIndex!.toString()) + 1
