@@ -1,6 +1,7 @@
 import { Component, type ReactNode } from "react";
 
-import Background from "./components/Background.tsx";
+import OriginalBackground from "./components/backgrounds/OriginalBackground";
+import CosmicBackground from "./components/backgrounds/cosmic-background/CosmicBackground";
 import Impression from "./components/Impression.tsx";
 import PerfectIntegrationImage from "./assets/expression/perfect-integration.png";
 import WangMiaoCatImage from "./assets/expression/wang-miao-cat.png";
@@ -61,6 +62,7 @@ class App extends Component {
     }
 
     public render(): ReactNode {
+        const backgrounds: Array<typeof OriginalBackground> = [OriginalBackground, CosmicBackground];
         const impressions: Array<string> = this.favicons;
         const expressions: Array<string> = [
             "炜翼",
@@ -75,12 +77,13 @@ class App extends Component {
             "NINTENDO IS THE FUCKIN RULER OF THE WORLD!!!"
         ];
 
+        const RandomBackground: (typeof OriginalBackground) = backgrounds[Math.floor(Math.random() * backgrounds.length)];
         const randomImpression: string = impressions[Math.floor(Math.random() * impressions.length)];
         const randomExpression: string = expressions[Math.floor(Math.random() * expressions.length)];
 
         return (
             <div>
-                <Background />
+                <RandomBackground />
                 <Impression imageSource={randomImpression}/>
                 <Expression sign={randomExpression} />
             </div>

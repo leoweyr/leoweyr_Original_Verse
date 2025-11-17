@@ -1,7 +1,7 @@
 import { Component, type ReactNode, type CSSProperties} from "react";
 
 
-class Background extends Component {
+class OriginalBackground extends Component {
     public render(): ReactNode {
         const baseStyle: CSSProperties = {
             position: 'absolute',
@@ -31,4 +31,4 @@ class Background extends Component {
 }
 
 
-export default Background;
+export default OriginalBackground;
