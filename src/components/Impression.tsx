@@ -24,7 +24,7 @@ class Impression extends Component<ImpressionProps> {
         }
 
         const containerStyle: CSSProperties = {
-            position: 'relative',
+            position: 'fixed',
             width: '33.203125vh',
             height: '33.203125vh',
             borderRadius: '50%',
