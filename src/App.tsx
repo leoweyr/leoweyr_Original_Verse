@@ -6,6 +6,10 @@ import PerfectIntegrationImage from "./assets/expression/perfect-integration.png
 import WangMiaoCatImage from "./assets/expression/wang-miao-cat.png";
 import TheEnigmaticDaisyImage from "./assets/expression/the-enigmatic-daisy.png";
 import DeeponlyTaImage from "./assets/expression/deeponly-ta.png";
+import AGamerZeldaImage from "./assets/expression/a-gamer-zelda.png";
+import SpheriticistImage from "./assets/expression/spheriticist.png";
+import NotionianImage from "./assets/expression/notionian.png";
+import NintendoIsTheFuckinRulerOfTheWorld from "./assets/expression/nintendo-is-the-fuckin-ruler-of-the-world.png";
 import Expression from "./components/Expression.tsx";
 
 
@@ -15,11 +19,23 @@ class App extends Component {
             PerfectIntegrationImage,
             WangMiaoCatImage,
             TheEnigmaticDaisyImage,
-            DeeponlyTaImage
+            DeeponlyTaImage,
+            AGamerZeldaImage,
+            SpheriticistImage,
+            NotionianImage,
+            NintendoIsTheFuckinRulerOfTheWorld
         ];
         const expressions: Array<string> = [
             "炜翼",
-            "leoweyr"
+            "leoweyr",
+            "Perfect Integration",
+            "Wang Miao Cat",
+            "The Enigmatic Daisy",
+            "Deeponly Ta",
+            "A Gamer Zelda",
+            "Spheriticist",
+            "Notionian",
+            "NINTENDO IS THE FUCKIN RULER OF THE WORLD!!!"
         ];
 
         const randomImpression: string = impressions[Math.floor(Math.random() * impressions.length)];
