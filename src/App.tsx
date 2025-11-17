@@ -14,8 +14,24 @@ import Expression from "./components/Expression.tsx";
 
 
 class App extends Component {
-    render(): ReactNode {
-        const impressions: Array<string> = [
+    private readonly titles: Array<string>;
+    private readonly descriptions: Array<string>;
+    private readonly favicons: Array<string>;
+
+    constructor(props: {}) {
+        super(props);
+
+        this.titles = [
+            "Welcome to Leoweyr Original Verse",
+            "欢迎来到炜翼的宇宙"
+        ];
+
+        this.descriptions = [
+            "A personal website independently designed and developed by leoweyr.",
+            "完全由炜翼独立自主设计和制作的个人网站。"
+        ];
+
+        this.favicons = [
             PerfectIntegrationImage,
             WangMiaoCatImage,
             TheEnigmaticDaisyImage,
@@ -25,6 +41,27 @@ class App extends Component {
             NotionianImage,
             NintendoIsTheFuckinRulerOfTheWorld
         ];
+
+        document.title = this.titles[Math.floor(Math.random() * this.titles.length)];
+
+        const metaDescription: Element | null = document.querySelector('meta[name="description"]');
+
+        if (metaDescription) {
+            metaDescription.setAttribute(
+                "content",
+                this.descriptions[Math.floor(Math.random() * this.descriptions.length)]
+            );
+        }
+
+        const linkIcon: Element | null = document.querySelector("link[rel='icon']");
+
+        if (linkIcon) {
+            linkIcon.setAttribute("href", this.favicons[Math.floor(Math.random() * this.favicons.length)]);
+        }
+    }
+
+    public render(): ReactNode {
+        const impressions: Array<string> = this.favicons;
         const expressions: Array<string> = [
             "炜翼",
             "leoweyr",
