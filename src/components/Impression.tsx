@@ -48,6 +48,12 @@ class Impression extends Component<ImpressionProps> {
             </div>
         );
     }
+
+    public componentDidMount(): void {
+        const preloadImageSource: string = this.props.imageSource;
+        const preloadImage = new Image();
+        preloadImage.src = preloadImageSource;
+    }
 }
 
 
