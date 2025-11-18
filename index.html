@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-        <meta name="copyright" content="Copyring (C) 2022 leoweyr">
-        <link rel="stylesheet" type="text/css" href="css/2D.css">
-        <link rel="shortcut icon" type="favicon.ico" href="assets/icon.png">
-        <link rel="prefetch" href="assets/music.mp3">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
-        <script src="js/2Dynamic.js"></script>
-        <title>欢迎来到雷欧炜翼宇宙</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Leoweyr Original Verse</title>
+        <meta name="description" content="A personal website independently designed and developed by leoweyr, powered by TypeScript, React, and Vite. The prototype and initial mockup designs were created using Concepts and Figma." />
+        <link rel="icon" href="public/favicon.ico" />
     </head>
+    <style>
+        html, body, #root {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
     <body>
-        <div id="CenterWord">欢迎来到雷欧炜翼的宇宙</div>
-        <div id="MagicBall"></div>
-        <div class="Mask"></div>
-        <audio id="music" src="../assets/music.mp3" autoplay="autoplay"/>
+        <noscript>You need to enable JavaScript to run this website.</noscript>
+        <div id="root"></div>
+        <script src="src/index.tsx" type="module"></script>
     </body>
 </html>
