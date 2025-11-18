@@ -99,6 +99,12 @@ class MusicBox extends Component<{}, MusicBoxState> {
     }
 
     public componentDidMount(): void {
+        const preloadImages: Array<string> = [PausedMusicBoxImage, RunningMusicBoxImage];
+        preloadImages.forEach((imageSource: string): void => {
+            const image = new Image();
+            image.src = imageSource;
+        });
+
         if (this.audioRef.current) {
             this.audioRef.current.preload = "auto";
             this.audioRef.current.loop = true;
