@@ -12,6 +12,7 @@ import SpheriticistImage from "./assets/expression/spheriticist.png";
 import NotionianImage from "./assets/expression/notionian.png";
 import NintendoIsTheFuckinRulerOfTheWorld from "./assets/expression/nintendo-is-the-fuckin-ruler-of-the-world.png";
 import Expression from "./components/Expression.tsx";
+import MusicBox from "./components/MusicBox.tsx";
 
 
 class App extends Component {
@@ -86,6 +87,7 @@ class App extends Component {
                 <RandomBackground />
                 <Impression imageSource={randomImpression}/>
                 <Expression sign={randomExpression} />
+                <MusicBox />
             </div>
         );
     }
