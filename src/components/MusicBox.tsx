@@ -43,7 +43,7 @@ class MusicBox extends Component<{}, MusicBoxState> {
         const imageStyle: CSSProperties = {
             width: '100%',
             height: '100%',
-            backgroundImage: `url(${PausedMusicBoxImage})`,
+            backgroundImage: this.state.isPlaying ? `url(${RunningMusicBoxImage})` :`url(${PausedMusicBoxImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
@@ -74,15 +74,8 @@ class MusicBox extends Component<{}, MusicBoxState> {
                     }
                 }
             >
-                <div
-                    style={rotatingImageStyle}
-                    onClick={
-                        (event): void => {
-                            event.currentTarget!.style.backgroundImage = `url(${RunningMusicBoxImage})`;
-                        }
-                    }
-                />
-                <audio ref={this.audioRef} src={MicrowaveEchoOfTheVerseAudio}/>
+                <div style={rotatingImageStyle} />
+                <audio ref={this.audioRef} src={MicrowaveEchoOfTheVerseAudio} />
                 <style>
                     {`
                         @keyframes rotate {
