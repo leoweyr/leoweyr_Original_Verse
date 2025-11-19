@@ -1,12 +1,13 @@
 import { Component, type ReactNode } from "react";
 
+import { Observer } from "./features/observer-perspective/Observer";
 import OriginalBackground from "./components/backgrounds/OriginalBackground";
 import CosmicBackground from "./components/backgrounds/cosmic-background/CosmicBackground";
 import Impression from "./components/Impression.tsx";
 import PerfectIntegrationImage from "./assets/expression/perfect-integration.png";
 import WangMiaoCatImage from "./assets/expression/wang-miao-cat.png";
 import TheEnigmaticDaisyImage from "./assets/expression/the-enigmatic-daisy.png";
-import DeeponlyTaImage from "./assets/expression/deeponly-ta.png";
+// Treasured: import DeeponlyTaImage from "./assets/expression/deeponly-ta.png"
 import AGamerZeldaImage from "./assets/expression/a-gamer-zelda.png";
 import SpheriticistImage from "./assets/expression/spheriticist.png";
 import NotionianImage from "./assets/expression/notionian.png";
@@ -16,42 +17,33 @@ import MusicBox from "./components/MusicBox.tsx";
 
 
 class App extends Component {
-    private readonly titles: Array<string>;
-    private readonly descriptions: Array<string>;
+    private readonly observer: Observer;
     private readonly favicons: Array<string>;
 
     constructor(props: {}) {
         super(props);
 
-        this.titles = [
-            "Welcome to Leoweyr Original Verse",
-            "欢迎来到炜翼的宇宙"
-        ];
-
-        this.descriptions = [
-            "A personal website independently designed and developed by leoweyr.",
-            "完全由炜翼独立自主设计和制作的个人网站。"
-        ];
+        this.observer = Observer.getInstance();
 
         this.favicons = [
             PerfectIntegrationImage,
             WangMiaoCatImage,
             TheEnigmaticDaisyImage,
-            DeeponlyTaImage,
+            // Treasured: DeeponlyTaImage
             AGamerZeldaImage,
             SpheriticistImage,
             NotionianImage,
             NintendoIsTheFuckinRulerOfTheWorld
         ];
 
-        document.title = this.titles[Math.floor(Math.random() * this.titles.length)];
+        document.title = this.observer.synesthetize("welcome");
 
         const metaDescription: Element | null = document.querySelector('meta[name="description"]');
 
         if (metaDescription) {
             metaDescription.setAttribute(
                 "content",
-                this.descriptions[Math.floor(Math.random() * this.descriptions.length)]
+                this.observer.synesthetize("meta.description")
             );
         }
 
@@ -66,16 +58,15 @@ class App extends Component {
         const backgrounds: Array<typeof OriginalBackground> = [OriginalBackground, CosmicBackground];
         const impressions: Array<string> = this.favicons;
         const expressions: Array<string> = [
-            "炜翼",
-            "leoweyr",
-            "Perfect Integration",
-            "Wang Miao Cat",
-            "The Enigmatic Daisy",
-            "Deeponly Ta",
-            "A Gamer Zelda",
-            "Spheriticist",
-            "Notionian",
-            "NINTENDO IS THE FUCKIN RULER OF THE WORLD!!!"
+            this.observer.synesthetize("leoweyr"),
+            this.observer.synesthetize("slice.perfect-integration"),
+            this.observer.synesthetize("slice.wang-miao-cat"),
+            this.observer.synesthetize("slice.the-enigmatic-daisy"),
+            // Treasured: this.observer.synesthetize("slice.deeponly-ta")
+            this.observer.synesthetize("slice.a-gamer-zelda"),
+            this.observer.synesthetize("slice.spheriticist"),
+            this.observer.synesthetize("slice.notionian"),
+            this.observer.synesthetize("slice.nintendo-is-the-fuckin-ruler-of-the-world")
         ];
 
         const RandomBackground: (typeof OriginalBackground) = backgrounds[Math.floor(Math.random() * backgrounds.length)];
