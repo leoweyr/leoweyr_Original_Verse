@@ -14,21 +14,15 @@ class Impression extends Component<ImpressionProps> {
     public render(): ReactNode {
         const { imageSource } = this.props;
 
-        const wrapperStyle: CSSProperties = {
-            display: 'flex',
-            width: '100vw',
-            height: '100vh',
-            minHeight: '100vh',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }
-
         const containerStyle: CSSProperties = {
             position: 'fixed',
+            top: '33.3984375vh',
+            left: 'calc(50vw - 16.6015625vh)',
             width: '33.203125vh',
             height: '33.203125vh',
             borderRadius: '50%',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            zIndex: 10
         }
 
         const imageStyle: CSSProperties = {
@@ -41,10 +35,8 @@ class Impression extends Component<ImpressionProps> {
         }
 
         return (
-            <div style={wrapperStyle}>
-                <div style={containerStyle}>
-                    <div style={imageStyle} />
-                </div>
+            <div style={containerStyle}>
+                <div style={imageStyle} />
             </div>
         );
     }

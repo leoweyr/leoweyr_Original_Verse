@@ -9,7 +9,8 @@ class OriginalBackground extends Component {
             left: '0',
             width: '100vw',
             height: '100vh',
-            backgroundColor: '#ffffff'
+            backgroundColor: '#ffffff',
+            zIndex: 0
         }
 
         const maskStyle: CSSProperties = {
@@ -19,7 +20,8 @@ class OriginalBackground extends Component {
             width: '100vw',
             height: '100vh',
             backgroundColor: '#FBE2C3',
-            opacity: '0.2'
+            opacity: '0.2',
+            zIndex: parseInt(baseStyle.zIndex!.toString()) + 1
         }
 
         return (
