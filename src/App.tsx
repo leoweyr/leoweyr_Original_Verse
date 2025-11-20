@@ -1,10 +1,7 @@
 import { Component, type ReactNode } from "react";
 
 import { Observer } from "./features/observer-perspective/Observer";
-import Spotlight from "./components/spotlight/Spotlight.tsx";
-import OriginalBackground from "./components/backgrounds/OriginalBackground";
-import CosmicBackground from "./components/backgrounds/cosmic-background/CosmicBackground";
-import MusicBox from "./components/MusicBox.tsx";
+import MainStage from "./scenes/MainStage.tsx";
 
 
 class App extends Component {
@@ -28,14 +25,9 @@ class App extends Component {
     }
 
     public render(): ReactNode {
-        const backgrounds: Array<typeof OriginalBackground> = [OriginalBackground, CosmicBackground];
-        const RandomBackground: (typeof OriginalBackground) = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-
         return (
             <div>
-                <Spotlight />
-                <RandomBackground />
-                <MusicBox />
+                <MainStage />
             </div>
         );
     }
