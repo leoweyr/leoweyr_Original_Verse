@@ -51,7 +51,7 @@ class Expression extends Component<ExpressionProps> {
             zIndex: parseInt(barRectangleStyle.zIndex!.toString()) + 1
         }
 
-        const textContainerStyle: CSSProperties = {
+        const textAnchorStyle: CSSProperties = {
             position: 'relative',
             display: 'inline-block',
             fontFamily: 'Inter, sans-serif',
@@ -68,14 +68,14 @@ class Expression extends Component<ExpressionProps> {
             margin: 0,
             padding: 0,
             whiteSpace: 'nowrap',
-            zIndex: parseInt(textContainerStyle.zIndex!.toString()) + 1
+            zIndex: parseInt(textAnchorStyle.zIndex!.toString()) + 1
         }
 
         return (
             <div style={barRectangleStyle}>
                 <div style={barLeftCircleStyle} />
                 <div style={barRightCircleStyle} />
-                <div style={textContainerStyle}>
+                <div style={textAnchorStyle}>
                     <span style={textStyle}>{sign}</span>
                 </div>
             </div>
