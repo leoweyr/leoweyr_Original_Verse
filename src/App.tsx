@@ -1,7 +1,7 @@
 import { Component, type ReactNode } from "react";
 
 import { Observer } from "./features/observer-perspective/Observer";
-import MainStage from "./scenes/MainStage.tsx";
+import MainStage from "./scenes/MainStage";
 
 
 class App extends Component {
