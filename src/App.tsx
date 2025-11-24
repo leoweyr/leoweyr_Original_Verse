@@ -40,9 +40,13 @@ class App extends Component<{}, AppState> {
         }
 
         const linkIcon: Element | null = document.querySelector("link[rel='icon']");
+        const timestamp: number = new Date().getTime();
 
         if (linkIcon) {
-            linkIcon.setAttribute("href", observer.getPerspectiveIconImageSource());
+            linkIcon.setAttribute(
+                "href",
+                `${observer.getPerspectiveIconImageSource()}?t=${timestamp}`
+            );
         }
     }
 
