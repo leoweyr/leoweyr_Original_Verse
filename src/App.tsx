@@ -40,14 +40,18 @@ class App extends Component<{}, AppState> {
         }
 
         const linkIcon: Element | null = document.querySelector("link[rel='icon']");
+
+        if(linkIcon) {
+            linkIcon.remove();
+        }
+
+        const link: HTMLLinkElement = document.createElement('link');
         const timestamp: number = new Date().getTime();
 
-        if (linkIcon) {
-            linkIcon.setAttribute(
-                "href",
-                `${observer.getPerspectiveIconImageSource()}?t=${timestamp}`
-            );
-        }
+        link.rel = 'icon';
+        link.href = `${observer.getPerspectiveIconImageSource()}?t=${timestamp}`;
+
+        document.head.appendChild(link);
     }
 
     public render(): ReactNode {
