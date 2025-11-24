@@ -8,17 +8,26 @@ import Love from "../components/Love";
 import CenterSubtitle from "../components/CenterSubtitle";
 
 
-interface IntroState {
-    phase: number;
+interface IntroProps {
+    onCompleted?: () => void;
 }
 
 
-class Intro extends Component<{}, IntroState> {
-    constructor(props: {}) {
+interface IntroState {
+    phase: number;
+    loveAnimationStarted: boolean;
+}
+
+
+class Intro extends Component<IntroProps, IntroState> {
+    private loveAnimationTimeout: number | null = null;
+
+    constructor(props: IntroProps) {
         super(props);
 
         this.state = {
-            phase: 1
+            phase: 1,
+            loveAnimationStarted: false
         };
     }
 
@@ -66,6 +75,24 @@ class Intro extends Component<{}, IntroState> {
                 )}
             </div>
         );
+    }
+
+    public componentDidUpdate(prevProps: Readonly<IntroProps>, prevState: Readonly<IntroState>, snapshot?: any): void {
+        if (prevState.phase !== 2 && this.state.phase === 2 && !this.state.loveAnimationStarted) {
+            this.loveAnimationTimeout = setTimeout((): void => {
+                this.setState({loveAnimationStarted: true});
+
+                if (this.props.onCompleted) {
+                    this.props.onCompleted();
+                }
+            }, 2800);
+        }
+    }
+
+    public componentWillUnmount(): void {
+        if (this.loveAnimationTimeout) {
+            clearTimeout(this.loveAnimationTimeout);
+        }
     }
 }
 
