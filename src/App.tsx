@@ -38,6 +38,12 @@ class App extends Component<{}, AppState> {
                 observer.synesthetize("meta.description")
             );
         }
+
+        const linkIcon: Element | null = document.querySelector("link[rel='icon']");
+
+        if (linkIcon) {
+            linkIcon.setAttribute("href", observer.getPerspectiveIconImageSource());
+        }
     }
 
     public render(): ReactNode {

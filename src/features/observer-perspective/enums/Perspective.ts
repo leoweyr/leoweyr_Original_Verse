@@ -1,4 +1,4 @@
-export const Spectrum = {
+export const Perspective = {
     PERFECT_INTEGRATION: 0,
     WANG_MIAO_CAT: 1,
     DEEPONLY_TA: 2,
@@ -10,4 +10,4 @@ export const Spectrum = {
 }
 
 
-export type Spectrum = typeof Spectrum[keyof typeof Spectrum];
+export type Perspective = typeof Perspective[keyof typeof Perspective];
