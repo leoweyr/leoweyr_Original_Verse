@@ -77,7 +77,7 @@ class Intro extends Component<IntroProps, IntroState> {
         );
     }
 
-    public componentDidUpdate(prevProps: Readonly<IntroProps>, prevState: Readonly<IntroState>, snapshot?: any): void {
+    public componentDidUpdate(_prevProps: Readonly<IntroProps>, prevState: Readonly<IntroState>, _snapshot?: any): void {
         if (prevState.phase !== 2 && this.state.phase === 2 && !this.state.loveAnimationStarted) {
             this.loveAnimationTimeout = setTimeout((): void => {
                 this.setState({loveAnimationStarted: true});
