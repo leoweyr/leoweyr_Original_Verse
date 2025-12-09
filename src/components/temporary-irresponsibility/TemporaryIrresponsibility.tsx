@@ -112,12 +112,20 @@ class TemporaryIrresponsibility extends Component<{}, TemporaryIrresponsibilityS
             this.state.rotateStage === RotateStage.NOT_NEED &&
             prevState.rotateStage !== RotateStage.PROMPTING
         ) {
+            if (this.rotationCompleteAnimationTimer) {
+                clearTimeout(this.rotationCompleteAnimationTimer);
+            }
+
             this.setState({ rotateStage: RotateStage.PROMPTING });
         } else if (
             this.state.isPortraitNarrow &&
             this.state.rotateStage === RotateStage.COMPLETED &&
             prevState.rotateStage !== RotateStage.PROMPTING
         ) {
+            if (this.rotationCompleteAnimationTimer) {
+                clearTimeout(this.rotationCompleteAnimationTimer);
+            }
+
             this.setState({ rotateStage: RotateStage.PROMPTING });
         }
     }
