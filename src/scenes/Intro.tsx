@@ -20,7 +20,7 @@ interface IntroState {
 
 
 class Intro extends Component<IntroProps, IntroState> {
-    private loveAnimationTimeout: number | null = null;
+    private loveAnimationTimer: number | null = null;
 
     constructor(props: IntroProps) {
         super(props);
@@ -79,7 +79,7 @@ class Intro extends Component<IntroProps, IntroState> {
 
     public componentDidUpdate(_prevProps: Readonly<IntroProps>, prevState: Readonly<IntroState>, _snapshot?: any): void {
         if (prevState.phase !== 2 && this.state.phase === 2 && !this.state.loveAnimationStarted) {
-            this.loveAnimationTimeout = setTimeout((): void => {
+            this.loveAnimationTimer = setTimeout((): void => {
                 this.setState({loveAnimationStarted: true});
 
                 if (this.props.onCompleted) {
@@ -90,8 +90,8 @@ class Intro extends Component<IntroProps, IntroState> {
     }
 
     public componentWillUnmount(): void {
-        if (this.loveAnimationTimeout) {
-            clearTimeout(this.loveAnimationTimeout);
+        if (this.loveAnimationTimer) {
+            clearTimeout(this.loveAnimationTimer);
         }
     }
 }

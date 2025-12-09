@@ -5,6 +5,7 @@ import { Scene } from "./scenes/enums/Scene"
 import { Observer } from "./features/observer-perspective/Observer";
 import Intro from "./scenes/Intro";
 import MainStage from "./scenes/MainStage";
+import TemporaryIrresponsibility from "./components/temporary-irresponsibility/TemporaryIrresponsibility";
 
 
 interface AppState {
@@ -69,6 +70,7 @@ class App extends Component<{}, AppState> {
                         </motion.div>
                     )}
                 </AnimatePresence>
+                <TemporaryIrresponsibility />
             </div>
         );
     }
