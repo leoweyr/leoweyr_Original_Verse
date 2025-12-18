@@ -1,8 +1,10 @@
 import { Component, type ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 import { Scene } from "./scenes/enums/Scene"
 import { Observer } from "./features/observer-perspective/Observer";
+import AnimationControlProvider from "./hocs/controllable-motion/AnimationControlProvider";
+import { ControllableMotionDiv } from "./hocs/controllable-motion/WithControllableMotionComponent";
 import Intro from "./scenes/Intro";
 import MainStage from "./scenes/MainStage";
 import TemporaryIrresponsibility from "./components/temporary-irresponsibility/TemporaryIrresponsibility";
@@ -49,29 +51,29 @@ class App extends Component<{}, AppState> {
 
     public render(): ReactNode {
         return (
-            <div>
+            <AnimationControlProvider>
                 <AnimatePresence>
                     {this.state.currentScene === Scene.INTRO ? (
-                        <motion.div
+                        <ControllableMotionDiv
                             key="intro"
                             exit={{ opacity: 0 }}
                             transition={{duration: 2}}
                         >
                             <Intro onCompleted={this.onIntroComplete} />
-                        </motion.div>
+                        </ControllableMotionDiv>
                     ) : (
-                        <motion.div
+                        <ControllableMotionDiv
                             key="main-stage"
                             initial={{opacity: 0}}
                             animate={{opacity: 1}}
                             transition={{duration: 2}}
                         >
                             <MainStage />
-                        </motion.div>
+                        </ControllableMotionDiv>
                     )}
                 </AnimatePresence>
                 <TemporaryIrresponsibility />
-            </div>
+            </AnimationControlProvider>
         );
     }
 }

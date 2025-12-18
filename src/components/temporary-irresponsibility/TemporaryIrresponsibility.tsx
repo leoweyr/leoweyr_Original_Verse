@@ -1,6 +1,7 @@
-import { Component, type ReactNode, type CSSProperties } from "react";
+import { Component, type Context, type ReactNode, type CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { type AnimationControlContextType, AnimationControlContext } from "../../hocs/controllable-motion/AnimationControlContext";
 import { RotateStage } from "./enums/RotateStage";
 import RotatePromptAnimation from "./animations/RotatePromptAnimation";
 import RotationCompleteAnimation from "./animations/RotationCompleteAnimation";
@@ -13,6 +14,10 @@ interface TemporaryIrresponsibilityState {
 
 
 class TemporaryIrresponsibility extends Component<{}, TemporaryIrresponsibilityState> {
+    static contextType: Context<AnimationControlContextType> = AnimationControlContext;
+
+    declare context: AnimationControlContextType;
+
     private readonly handlerOrientationChange: () => void = (): void => {
         this.setState({ isPortraitNarrow: this.isPortraitNarrowScreen() });
     };
@@ -106,6 +111,7 @@ class TemporaryIrresponsibility extends Component<{}, TemporaryIrresponsibilityS
 
             this.rotationCompleteAnimationTimer = setTimeout((): void => {
                 this.setState({ rotateStage: RotateStage.NOT_NEED });
+                this.context.resumeAnimation();
             }, 2000);
         } else if (
             this.state.isPortraitNarrow &&
@@ -117,6 +123,7 @@ class TemporaryIrresponsibility extends Component<{}, TemporaryIrresponsibilityS
             }
 
             this.setState({ rotateStage: RotateStage.PROMPTING });
+            this.context.pauseAnimation();
         } else if (
             this.state.isPortraitNarrow &&
             this.state.rotateStage === RotateStage.COMPLETED &&
@@ -127,6 +134,7 @@ class TemporaryIrresponsibility extends Component<{}, TemporaryIrresponsibilityS
             }
 
             this.setState({ rotateStage: RotateStage.PROMPTING });
+            this.context.pauseAnimation();
         }
     }
 
