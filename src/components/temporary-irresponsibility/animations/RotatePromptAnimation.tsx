@@ -1,15 +1,18 @@
 import { Component, type ReactNode } from "react";
 import { type Variant, type Transition, motion } from "framer-motion";
 
+import { Observer } from "../../../features/observer-perspective/Observer";
 import PhonePromptFocus from "../PhonePromptFocus";
 import PhoneModel from "../PhoneModel";
 
 
 class RotatePromptAnimation extends Component {
     public render(): ReactNode {
+        const observer: Observer = Observer.getInstance();
+
         const phoneModelAnchor: Variant = {
-            x: '180px',
-            y: '60px'
+            x: 180,
+            y: 60
         }
 
         const basicAnimationTransition: Transition = {
@@ -30,7 +33,7 @@ class RotatePromptAnimation extends Component {
         }
 
         return (
-            <PhonePromptFocus>
+            <PhonePromptFocus width={observer.getFieldOfView(0.348837).width}>
                 {/* Static phone model animation. */}
                 <motion.g
                     initial={phoneModelAnchor}
@@ -59,7 +62,7 @@ class RotatePromptAnimation extends Component {
                 <motion.path
                     d="M 150 60 A 90 90 0 0 0 60 150"
                     stroke="currentColor"
-                    strokeWidth="9.375px"
+                    strokeWidth="9.375"
                     strokeLinecap="round"
                     fill="none"
                     initial={{ pathLength: 0, opacity: 0 }}
@@ -73,7 +76,7 @@ class RotatePromptAnimation extends Component {
                 <motion.path
                     d="M 60 150 L 45 135 M 60 150 L 75 135"
                     stroke="currentColor"
-                    strokeWidth="9.375px"
+                    strokeWidth="9.375"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     initial={{ opacity: 0 }}

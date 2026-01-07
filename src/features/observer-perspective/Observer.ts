@@ -90,4 +90,19 @@ export class Observer {
                 return this.synesthetize("slice.perfect-integration");
         }
     }
+
+    public getFieldOfView(scale: number = 1): { width: number; height: number } {
+        if (scale <= 0 || scale > 1) {
+            throw new Error('Scale must be greater than 0 and less than or equal to 1.');
+        }
+
+        if (typeof window === 'undefined') {
+            return { width: 0, height: 0 };
+        }
+
+        return {
+            width: window.innerWidth * scale,
+            height: window.innerHeight * scale
+        };
+    }
 }
