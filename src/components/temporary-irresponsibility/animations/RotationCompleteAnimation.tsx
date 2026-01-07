@@ -5,12 +5,31 @@ import { Observer } from "../../../features/observer-perspective/Observer";
 import PhonePromptFocus from "../PhonePromptFocus";
 
 
-class RotationCompleteAnimation extends Component {
-    public render(): ReactNode {
-        const observer: Observer = Observer.getInstance();
+interface RotationCompleteAnimationState {
+    phonePromptFocusSideLength: number;
+}
 
+
+class RotationCompleteAnimation extends Component<{}, RotationCompleteAnimationState> {
+    private handleResizePhonePromptFocus: () => void = (): void => {
+        const observer: Observer = Observer.getInstance();
+        this.setState({
+            phonePromptFocusSideLength: observer.getFieldOfView(0.348837).height
+        });
+    };
+
+    constructor(props: {}) {
+        super(props);
+        
+        const observer: Observer = Observer.getInstance();
+        this.state = {
+            phonePromptFocusSideLength: observer.getFieldOfView(0.348837).height
+        };
+    }
+
+    public render(): ReactNode {
         return (
-            <PhonePromptFocus height={observer.getFieldOfView(0.348837).height}>
+            <PhonePromptFocus height={this.state.phonePromptFocusSideLength}>
                 {/* Counterclockwise circular path animation. */}
                 <motion.path
                     d="M 180 300
@@ -48,6 +67,16 @@ class RotationCompleteAnimation extends Component {
                 />
             </PhonePromptFocus>
         );
+    }
+
+    public componentDidMount(): void {
+        window.addEventListener('resize', this.handleResizePhonePromptFocus);
+        window.addEventListener('orientationchange', this.handleResizePhonePromptFocus);
+    }
+
+    public componentWillUnmount(): void {
+        window.removeEventListener('resize', this.handleResizePhonePromptFocus);
+        window.removeEventListener('orientationchange', this.handleResizePhonePromptFocus);
     }
 }
 

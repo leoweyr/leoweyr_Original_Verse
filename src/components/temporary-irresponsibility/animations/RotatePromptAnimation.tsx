@@ -6,10 +6,29 @@ import PhonePromptFocus from "../PhonePromptFocus";
 import PhoneModel from "../PhoneModel";
 
 
-class RotatePromptAnimation extends Component {
-    public render(): ReactNode {
-        const observer: Observer = Observer.getInstance();
+interface RotatePromptAnimationState {
+    phonePromptFocusSideLength: number;
+}
 
+
+class RotatePromptAnimation extends Component<{}, RotatePromptAnimationState> {
+    private handleResizePhonePromptFocus: () => void = (): void => {
+        const observer: Observer = Observer.getInstance();
+        this.setState({
+            phonePromptFocusSideLength: observer.getFieldOfView(0.348837).width
+        });
+    };
+
+    constructor(props: {}) {
+        super(props);
+        
+        const observer: Observer = Observer.getInstance();
+        this.state = {
+            phonePromptFocusSideLength: observer.getFieldOfView(0.348837).width
+        };
+    }
+
+    public render(): ReactNode {
         const phoneModelAnchor: Variant = {
             x: 180,
             y: 60
@@ -33,7 +52,7 @@ class RotatePromptAnimation extends Component {
         }
 
         return (
-            <PhonePromptFocus width={observer.getFieldOfView(0.348837).width}>
+            <PhonePromptFocus width={this.state.phonePromptFocusSideLength}>
                 {/* Static phone model animation. */}
                 <motion.g
                     initial={phoneModelAnchor}
@@ -88,6 +107,16 @@ class RotatePromptAnimation extends Component {
                 />
             </PhonePromptFocus>
         );
+    }
+
+    public componentDidMount(): void {
+        window.addEventListener('resize', this.handleResizePhonePromptFocus);
+        window.addEventListener('orientationchange', this.handleResizePhonePromptFocus);
+    }
+
+    public componentWillUnmount(): void {
+        window.removeEventListener('resize', this.handleResizePhonePromptFocus);
+        window.removeEventListener('orientationchange', this.handleResizePhonePromptFocus);
     }
 }
 
