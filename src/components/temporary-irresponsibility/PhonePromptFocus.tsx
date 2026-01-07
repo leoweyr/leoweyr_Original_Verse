@@ -74,6 +74,15 @@ class PhonePromptFocus extends Component<PhoneFocusPromptProps, PhoneFocusPrompt
             </div>
         );
     }
+
+    public componentDidUpdate(prevProps: Readonly<PhoneFocusPromptProps>): void {
+        if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+            this.setState({
+                width: this.props.width ? this.props.width : (this.props.height ? this.props.height : 360),
+                height: this.props.height ? this.props.height : (this.props.width ? this.props.width : 360)
+            });
+        }
+    }
 }
 
 
