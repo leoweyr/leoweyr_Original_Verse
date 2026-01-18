@@ -1,5 +1,6 @@
-import { Component, type ReactNode } from "react";
+import { Component, type Context, type ReactNode } from "react";
 
+import { AnimationControlContext, type AnimationControlContextType } from "../hocs/controllable-motion/AnimationControlContext";
 import { Observer } from "../features/observer-perspective/Observer";
 import { ControllableMotionDiv } from "../hocs/controllable-motion/WithControllableMotionComponent";
 import OriginalMask from "../components/backgrounds/OriginalMask";
@@ -15,19 +16,23 @@ interface IntroProps {
 
 interface IntroState {
     phase: number;
-    loveAnimationStarted: boolean;
 }
 
 
 class Intro extends Component<IntroProps, IntroState> {
+    static contextType: Context<AnimationControlContextType> = AnimationControlContext;
+
+    declare context: AnimationControlContextType;
+
     private loveAnimationTimer: number | null = null;
+    private loveAnimationRemainingTime: number = 2800;
+    private loveAnimationLastControlTimestamp: number = 0;
 
     constructor(props: IntroProps) {
         super(props);
 
         this.state = {
             phase: 1,
-            loveAnimationStarted: false
         };
     }
 
@@ -79,14 +84,33 @@ class Intro extends Component<IntroProps, IntroState> {
     }
 
     public componentDidUpdate(_prevProps: Readonly<IntroProps>, prevState: Readonly<IntroState>, _snapshot?: any): void {
-        if (prevState.phase !== 2 && this.state.phase === 2 && !this.state.loveAnimationStarted) {
-            this.loveAnimationTimer = setTimeout((): void => {
-                this.setState({loveAnimationStarted: true});
+        const { isPaused } = this.context;
 
+        const handleLoveAnimationCompleted: () => void = (): void => {
+            if (!isPaused) {
                 if (this.props.onCompleted) {
                     this.props.onCompleted();
                 }
-            }, 2800);
+            }
+        };
+
+        // Animation pause.
+        if (isPaused && this.loveAnimationTimer) {
+            clearTimeout(this.loveAnimationTimer);
+            this.loveAnimationTimer = null;
+            this.loveAnimationRemainingTime -= (Date.now() - this.loveAnimationLastControlTimestamp);
+        }
+
+        // Animation resume.
+        if (!isPaused && this.loveAnimationLastControlTimestamp !== 0) {
+            this.loveAnimationLastControlTimestamp = Date.now();
+            this.loveAnimationTimer = setTimeout(handleLoveAnimationCompleted, this.loveAnimationRemainingTime);
+        }
+
+        // Initial trigger.
+        if (prevState.phase !== 2 && this.state.phase === 2 && this.loveAnimationLastControlTimestamp === 0) {
+            this.loveAnimationLastControlTimestamp = Date.now();
+            this.loveAnimationTimer = setTimeout(handleLoveAnimationCompleted, this.loveAnimationRemainingTime);
         }
     }
 
