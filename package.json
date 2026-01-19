@@ -1,7 +1,7 @@
 {
   "name": "leoweyr-original-verse",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A personal website independently designed and developed by leoweyr, powered by TypeScript, React, and Vite. The prototype and initial mockup designs were created using Concepts and Figma.",
   "bugs": "https://github.com/leoweyr/leoweyr_Original_Verse/issues",
   "type": "module",
