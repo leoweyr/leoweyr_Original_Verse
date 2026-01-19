@@ -1,0 +1,19 @@
+{
+  "leoweyr": "leoweyr",
+  "meta" : {
+    "description": "A personal website independently designed and developed by $t(leoweyr)."
+  },
+  "slice": {
+    "__comment": "The reason for using 'slice' instead of 'facet' or similar terms is to express that they are actual parts rather than different perspectives.",
+    "perfect-integration": "Perfect Integration",
+    "wang-miao-cat": "Wang Miao Cat",
+    "the-enigmatic-daisy": "The Enigmatic Daisy",
+    "deeponly-ta": "Deeponly Ta",
+    "a-gamer-zelda": "A Gamer Zelda",
+    "spheriticist": "Spheriticist",
+    "notionian": "Notionian",
+    "nintendo-is-the-fuckin-ruler-of-the-world": "NINTENDO IS THE FUCKIN RULER OF THE WORLD!!!"
+  },
+  "welcome": "Welcome to Leoweyr Original Verse",
+  "design-slogan": "The Art of Technology, The Technology of Art"
+}

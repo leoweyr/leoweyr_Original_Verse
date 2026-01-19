@@ -1,0 +1,124 @@
+import { Component, type ReactNode } from "react";
+import { type Variant, type Transition, motion } from "framer-motion";
+
+import { Observer } from "../../../features/observer-perspective/Observer";
+import PhonePromptFocus from "../PhonePromptFocus";
+import PhoneModel from "../PhoneModel";
+
+
+interface RotatePromptAnimationState {
+    phonePromptFocusSideLength: number;
+}
+
+
+class RotatePromptAnimation extends Component<{}, RotatePromptAnimationState> {
+    private handleResizePhonePromptFocus: () => void = (): void => {
+        const observer: Observer = Observer.getInstance();
+        this.setState({
+            phonePromptFocusSideLength: observer.getFieldOfView(0.348837).width
+        });
+    };
+
+    constructor(props: {}) {
+        super(props);
+        
+        const observer: Observer = Observer.getInstance();
+        this.state = {
+            phonePromptFocusSideLength: observer.getFieldOfView(0.348837).width
+        };
+    }
+
+    public render(): ReactNode {
+        const phoneModelAnchor: Variant = {
+            x: 180,
+            y: 60
+        }
+
+        const basicAnimationTransition: Transition = {
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            repeatDelay: 0.5
+        }
+
+        const phoneModelAnimationTransition: Transition = {
+            ...basicAnimationTransition,
+            times: [0, 0.1, 0.4, 0.9, 1]
+        }
+
+        const arrowAnimationTransition: Transition = {
+            ...basicAnimationTransition,
+            times: [0, 0.4, 0.55, 0.65, 0.9, 1]
+        }
+
+        return (
+            <PhonePromptFocus width={this.state.phonePromptFocusSideLength}>
+                {/* Static phone model animation. */}
+                <motion.g
+                    initial={phoneModelAnchor}
+                    animate={{
+                        opacity: [1, 1, 0.3, 0.3, 0.3]
+                    }}
+                    transition={phoneModelAnimationTransition}
+                >
+                    <PhoneModel />
+                </motion.g>
+                {/* Rotating phone model animation. */}
+                <motion.g
+                    initial={{
+                        ...phoneModelAnchor,
+                        originX: '60px',
+                        originY: '180px'
+                    }}
+                    animate={{
+                        rotate: [0, 0, -90, -90, -90]
+                    }}
+                    transition={phoneModelAnimationTransition}
+                >
+                    <PhoneModel />
+                </motion.g>
+                {/* Arrow path animation. */}
+                <motion.path
+                    d="M 150 60 A 90 90 0 0 0 60 150"
+                    stroke="currentColor"
+                    strokeWidth="9.375"
+                    strokeLinecap="round"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{
+                        pathLength: [0, 0, 0, 1, 1, 1],
+                        opacity: [0, 0, 0, 1, 1, 1]
+                    }}
+                    transition={arrowAnimationTransition}
+                />
+                {/* Arrowhead animation. */}
+                <motion.path
+                    d="M 60 150 L 45 135 M 60 150 L 75 135"
+                    stroke="currentColor"
+                    strokeWidth="9.375"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        pathLength: [0, 0, 0, 0, 1, 1],
+                        opacity: [0, 0, 0, 0, 1, 1]
+                    }}
+                    transition={arrowAnimationTransition}
+                />
+            </PhonePromptFocus>
+        );
+    }
+
+    public componentDidMount(): void {
+        window.addEventListener('resize', this.handleResizePhonePromptFocus);
+        window.addEventListener('orientationchange', this.handleResizePhonePromptFocus);
+    }
+
+    public componentWillUnmount(): void {
+        window.removeEventListener('resize', this.handleResizePhonePromptFocus);
+        window.removeEventListener('orientationchange', this.handleResizePhonePromptFocus);
+    }
+}
+
+
+export default RotatePromptAnimation;
